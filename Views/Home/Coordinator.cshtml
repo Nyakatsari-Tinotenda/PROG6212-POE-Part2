@@ -1,0 +1,55 @@
+﻿@model List< POE_Project.Models.Claim>
+@{
+    ViewData["Title"] = "Coordinator - Verify Claims";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Coordinator Dashboard - Verify Claims</h2>
+
+    @if (!Model.Any())
+    {
+        <p class="text-center text-muted">No pending claims found.</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Claim ID</th>
+                    <th>Hours Worked</th>
+                    <th>Hourly Rate</th>
+                    <th>Total</th>
+                    <th>Notes</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@claim.ClaimID</td>
+                        <td>@claim.HoursWorked</td>
+                        <td>@claim.HourlyRate</td>
+                        <td>R @claim.TotalAmount</td>
+                        <td>@claim.Notes</td>
+                        <td><span class="badge bg-warning text-dark">@claim.Status</span></td>
+                        <td>
+                            <form asp-action="UpdateStatus" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@claim.ClaimID" />
+                                <input type="hidden" name="status" value="Approved" />
+                                <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                            </form>
+
+                            <form asp-action="UpdateStatus" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@claim.ClaimID" />
+                                <input type="hidden" name="status" value="Rejected" />
+                                <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
