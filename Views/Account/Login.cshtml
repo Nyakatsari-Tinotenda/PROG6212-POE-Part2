@@ -1,0 +1,41 @@
+﻿@model POE_Project.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="card p-4 mt-4" style="max-width:450px;margin:auto;">
+    <h3 class="text-center mb-3">User Login</h3>
+
+    <form asp-action="Login" method="post">
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Department</label>
+            <select asp-for="Department" class="form-select">
+                <option>Lecturer</option>
+                <option>Coordinator</option>
+                <option>Manager</option>
+                <option>HR</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Login</button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+    }
+</div>

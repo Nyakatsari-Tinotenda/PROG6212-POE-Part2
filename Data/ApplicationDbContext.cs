@@ -1,13 +1,13 @@
-﻿
-    using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
     using POE_Project.Models;
     
 
     namespace POE_Project.Data
 {
-        public class ApplicationDbContext : DbContext
-        {
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                 : base(options) { }
 

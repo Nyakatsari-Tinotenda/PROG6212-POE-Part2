@@ -11,7 +11,8 @@
             public double HoursWorked { get; set; }
             [Required]
             public double HourlyRate { get; set; }
-            public double TotalAmount => HoursWorked * HourlyRate;
+        public double TotalAmount { get; set; }
+     
             public string Status { get; set; } = "Pending";
             public string? Notes { get; set; }
 

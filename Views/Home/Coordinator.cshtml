@@ -1,10 +1,15 @@
-﻿@model List< POE_Project.Models.Claim>
+﻿@model List<POE_Project.Models.Claim>
 @{
     ViewData["Title"] = "Coordinator - Verify Claims";
 }
 
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Coordinator Dashboard - Verify Claims</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
 
     @if (!Model.Any())
     {
@@ -35,15 +40,14 @@
                         <td>@claim.Notes</td>
                         <td><span class="badge bg-warning text-dark">@claim.Status</span></td>
                         <td>
-                            <form asp-action="UpdateStatus" method="post" class="d-inline">
+                            <form asp-action="ApproveClaim" method="post" style="display:inline">
+                                @Html.AntiForgeryToken()
                                 <input type="hidden" name="id" value="@claim.ClaimID" />
-                                <input type="hidden" name="status" value="Approved" />
                                 <button type="submit" class="btn btn-success btn-sm">Approve</button>
                             </form>
-
-                            <form asp-action="UpdateStatus" method="post" class="d-inline">
+                            <form asp-action="RejectClaim" method="post" style="display:inline; margin-left:6px;">
+                                @Html.AntiForgeryToken()
                                 <input type="hidden" name="id" value="@claim.ClaimID" />
-                                <input type="hidden" name="status" value="Rejected" />
                                 <button type="submit" class="btn btn-danger btn-sm">Reject</button>
                             </form>
                         </td>

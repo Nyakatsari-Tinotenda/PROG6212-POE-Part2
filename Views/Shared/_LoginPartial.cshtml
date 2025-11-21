@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using POE_Project.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+        <input type="hidden" name="returnUrl" value="/Identity/Account/Login" />
+        <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; color: inherit;">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </button>
+    </form>
+}
+else
+{
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
+        <i class="fas fa-sign-in-alt"></i>
+        Login
+    </a>
+}
